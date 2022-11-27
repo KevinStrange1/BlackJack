@@ -1,0 +1,41 @@
+html {
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    background-image: url(./Images/green-slate.jpg);
+ }
+
+ h1 {
+    text-align: center;
+    color: white
+ }
+
+img {
+    height: 200px;
+}
+
+.container {
+    display: table-column;
+}
+
+.left-side, .right-side {
+   /*  border: 2px solid black; */
+    padding: 20px;
+}
+
+.right-side {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button {
+    border-radius: 25px;
+    font-size: 50px;
+    background-color: white;
+    width: 200px;
+}
+
