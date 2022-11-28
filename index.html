@@ -11,28 +11,19 @@
     <body>
         <div class="container">
             <div class="left-side">
-                <h1>Dealer:</h1>
-                    <div class="dealer-cards">
-                        <img src="./Images/10-clubs.png">
-                        <img src="./Images/10-diamonds.png">
-                        <img src="./Images/10-diamonds.png">
-                        <img src="./Images/10-diamonds.png">
-                        <img src="./Images/10-diamonds.png">
+                <h1>Dealer: <span id="dealer-sum"></span></h1>
+                    <div id="dealer-cards">
+                        <img id="hidden" src="./Images/card back purple.png">
                     </div>
+                <h1>Player: <span id="player-sum"></span></h1>
+                    <div id="player-cards">
 
-                <h1>Player:</h1>
-                    <div class="player-cards">
-                        <img src="./Images/2-clubs.png">
-                        <img src="./Images/3-diamonds.png">
-                        <img src="./Images/10-diamonds.png">
-                        <img src="./Images/10-diamonds.png">
-                        <img src="./Images/10-diamonds.png">
                     </div>
             </div>
-            
             <div class="right-side">
-                <button>Hit</button>
-                <button>Stay</button>
+                <button class="hit" role="button">Hit!</button>
+                <button class="stay" role="button">Stay!</button>
+                <p id="result"></p>
             </div>
         </div>
     </body>
