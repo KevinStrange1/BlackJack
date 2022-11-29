@@ -89,4 +89,9 @@ button:active {
   color: red;
 }
 
-
+#new-game {
+  position: absolute;
+  right: 5%;
+  width: 100px;
+  border-radius: 50%;
+}
