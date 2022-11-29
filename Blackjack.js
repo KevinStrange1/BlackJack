@@ -1,4 +1,3 @@
-
 let deck;
 let hidden;
 
@@ -26,7 +25,7 @@ function buildDeck() {
             deck.push(value[j] + "-" + suits[i]);
         }
     }
-    //console.log(deck);
+    // console.log(deck);
 }
 
 function shuffle(deck) {
@@ -38,7 +37,7 @@ function shuffle(deck) {
         deck[j] = deck[k];
         deck[k] = temp;
     }
-    console.log(deck);
+    // console.log(deck);
 }
 
 function cardValues(card) {
@@ -61,22 +60,29 @@ function checkAce(card) {
     return 0;
 }
 
+function reduceAce (playerResult, playerAceLogic) {
+    while (playerResult > 21 && playerAceLogic) {
+        playerResult -= 10;
+        playerAceLogic -= 1;
+    }
+    document.getElementById("player-sum").innerText = playerResult;
+    return playerResult;
+}
 
 function startGame() {
+
     hidden = deck.pop();
     dealerResult += cardValues(hidden);
     dealerAceLogic += checkAce(hidden);
-   // console.log(hidden);
-   // console.log(dealerResult);
-   while (dealerResult < 17) {
-       let cardImg = document.createElement('Img');
-       let card = deck.pop();
-       cardImg.src = './Images/' + card + '.png';
-       dealerResult += cardValues(card);
-       dealerAceLogic += checkAce(card);
-       document.getElementById("dealer-cards").append(cardImg);
-   }
-   console.log(dealerResult);
+   
+    for (let j = 0; j < 1; j++) {
+        let cardImg = document.createElement('Img');
+        let card = deck.pop();
+        cardImg.src = './Images/' + card + '.png';
+        dealerResult += cardValues(card);
+        dealerAceLogic += checkAce(card);
+        document.getElementById("dealer-cards").append(cardImg);
+    }
 
    for (let i = 0; i < 2; i++) {
         let cardImg = document.createElement('Img');
@@ -86,9 +92,10 @@ function startGame() {
         playerAceLogic += checkAce(card);
         document.getElementById("player-cards").append(cardImg);
    }
+
    document.getElementById("hit").addEventListener('click', hit);
    document.getElementById("stay").addEventListener('click', stay);
-   console.log(playerResult);
+
 }
 
 function hit () {
@@ -102,11 +109,13 @@ function hit () {
         playerAceLogic += checkAce(card);
         document.getElementById("player-cards").append(cardImg);
 
+        document.getElementById("player-sum").innerText = playerResult;
+
     if (reduceAce(playerResult, playerAceLogic) > 21) {
         hitCard = false;
+        stay();
 
-    // document.getElementById("player-sum").innerText = playerResult;
-     //console.log(playerResult);
+        document.getElementById("player-sum").innerText = playerResult;
     }
 }
 
@@ -114,15 +123,28 @@ function stay () {
     dealerResult = reduceAce(dealerResult, dealerAceLogic);
     playerResult = reduceAce(playerResult, playerAceLogic);
 
+    while (dealerResult < 17) {
+        let cardImg = document.createElement('Img');
+        let card = deck.pop();
+        cardImg.src = './Images/' + card + '.png';
+        dealerResult += cardValues(card);
+        dealerAceLogic += checkAce(card);
+        document.getElementById("dealer-cards").append(cardImg);
+   }   
+
     hitCard = false;
     document.getElementById('hidden').src="./Images/" + hidden + ".png";
 
     let result = "";
-    if (playerResult > 21) {
-        result = "You Lose!";
+
+    if (playerResult == 21) {
+        result = "BlackJack!!";
+    }
+    else if (playerResult > 21) {
+        result = "Bust!! You Lose!";
     }
     else if (dealerResult > 21) {
-        result = "You Win!";
+        result = "Dealer Bust!! You Win!";
     }
     else if (playerResult == dealerResult) {
         result = "Draw!";
@@ -136,18 +158,7 @@ function stay () {
     document.getElementById("result").innerText = result;
     document.getElementById("dealer-sum").innerText = dealerResult;
     document.getElementById("player-sum").innerText = playerResult;
-    console.log(playerResult);
 }
-
-function reduceAce (playerResult, playerAceLogic) {
-    while (playerResult > 21 && playerAceLogic) {
-        playerAceLogic -= 1;
-    }
-    return playerResult;
-}
-
-
-
 
 
 // https://www.thatsoftwaredude.com/content/6196/coding-a-card-deck-in-javascript By Walter Guevara
