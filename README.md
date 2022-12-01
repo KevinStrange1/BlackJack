@@ -1,7 +1,7 @@
 # BlackJack
 Blackjack project 
 
-The object of the game is to win money by creating card totals higher than those of the dealer's hand but not exceeding 21, or by stopping at a total in the hope that dealer will bust. On their turn, players choose to "hit" (take a card), "stand" (end their turn and stop without taking a card).
+The object of the game is to win by creating card totals higher than those of the dealer's hand but not exceeding 21, or by stopping at a total in the hope that dealer will bust. On their turn, players choose to "hit" (take a card), "stand" (end their turn and stop without taking a card).
 
 Number cards count as their number, the jack, queen, and king ("face cards" or "pictures") count as 10, and aces count as either 1 or 11 according to the player's choice. If the total exceeds 21 points, it busts, and all bets on it immediately lose.
 
