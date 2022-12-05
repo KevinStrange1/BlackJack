@@ -4,8 +4,8 @@ let hidden;
 let dealerResult = 0;
 let playerResult = 0;
 
-let dealerAceLogic = 0;
-let playerAceLogic = 0;
+let dealerAceCount = 0;
+let playerAceCount = 0;
 
 let hitCard = true;
 
@@ -60,13 +60,21 @@ function checkAce(card) {
     return 0;
 }
 
-function reduceAce (playerResult, playerAceLogic) {
-    while (playerResult > 21 && playerAceLogic) {
+function playerAceLogic (playerResult, playerAceCount) {
+    while (playerResult > 21 && playerAceCount > 0) {
         playerResult -= 10;
-        playerAceLogic -= 1;
+        playerAceCount -= 1;
     }
     document.getElementById("player-sum").innerText = playerResult;
     return playerResult;
+}
+
+function dealerAceLogic (dealerResult, dealerAceCount) {
+    while (dealerResult > 21 && dealerAceCount > 0) {
+        dealerResult -= 10;
+        dealerAceCount -= 1;
+    }
+    return dealerResult;
 }
 
 function getDealerCards(numberOfCards) {
@@ -75,7 +83,7 @@ function getDealerCards(numberOfCards) {
         let card = deck.pop();
         cardImg.src = './Images/' + card + '.png';
         dealerResult += cardValues(card);
-        dealerAceLogic += checkAce(card);
+        dealerAceCount += checkAce(card);
         document.getElementById("dealer-cards").append(cardImg);
     }
 }
@@ -86,7 +94,7 @@ function getPlayerCards(numberOfCards) {
         let card = deck.pop();
         cardImg.src = './Images/' + card + '.png';
         playerResult += cardValues(card);
-        playerAceLogic += checkAce(card);
+        playerAceCount += checkAce(card);
         document.getElementById("player-cards").append(cardImg);
    }
 }
@@ -95,7 +103,7 @@ function startGame() {
 
     hidden = deck.pop();
     dealerResult += cardValues(hidden);
-    dealerAceLogic += checkAce(hidden);
+    dealerAceCount += checkAce(hidden);
     
     getDealerCards(1);
     getPlayerCards(2);
@@ -112,7 +120,7 @@ function hit () {
     getPlayerCards(1);
     document.getElementById("player-sum").innerText = playerResult;
 
-    if (reduceAce(playerResult, playerAceLogic) > 21) {
+    if (playerAceLogic(playerResult, playerAceCount) > 21) {
         hitCard = false;
         stay();
         document.getElementById("player-sum").innerText = playerResult;
@@ -120,15 +128,15 @@ function hit () {
 }
 
 function stay () {
-    dealerResult = reduceAce(dealerResult, dealerAceLogic);
-    playerResult = reduceAce(playerResult, playerAceLogic);
-
-    while (dealerResult < 17) {
-        getDealerCards(1);
-   }   
+    playerResult = playerAceLogic(playerResult, playerAceCount);   
 
     hitCard = false;
     document.getElementById('hidden').src="./Images/" + hidden + ".png";
+
+    while (dealerResult < 17) {
+        getDealerCards(1);  
+        dealerResult = dealerAceLogic(dealerResult, dealerAceCount);     
+   }
 
     let result = "";
 
