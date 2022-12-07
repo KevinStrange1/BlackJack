@@ -27,3 +27,4 @@ credit to the following :
     text animation thanks to Van Huynh, from website https://freefrontend.com/jquery-text-animations-effects/
     button designs from https://getcssscan.com/css-buttons-examples
     sounds from https://freesound.org/
+    fonts from google
