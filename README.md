@@ -20,3 +20,10 @@ Stand: Take no more cards; also known as "stand pat", "sit", "stick", or "stay".
 A hand can "hit" as many times as desired until the total is 21 or more. Players must stand on a total of 21. After the players hand is played, the dealer reveals the hole card and stands or draws according to the game's rules.
 
 More blackjack rules can be found at https://en.wikipedia.org/wiki/Blackjack#Rules_of_play_at_casinos.
+
+
+credit to the following :
+    https://www.youtube.com/watch?v=bMYCWccL-3U By Kenny Yip Coding - Used as a tutorial.
+    text animation thanks to Van Huynh, from website https://freefrontend.com/jquery-text-animations-effects/
+    button designs from https://getcssscan.com/css-buttons-examples
+    sounds from https://freesound.org/
