@@ -43,6 +43,31 @@ img {
     justify-content: center;
 }
 
+#result {
+  text-align: center;
+  font-size: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+#new-game {
+  position: absolute;
+  right: 15%;
+  width: 100px;
+  border-radius: 50%;
+}
+
+img {
+  animation: pop-in 1s;
+}
+
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* all code below this line was not created by me, added to make better UX. */
+
 button { /* button design from https://getcssscan.com/css-buttons-examples */
   appearance: none;
   width: 150px;
@@ -81,26 +106,78 @@ button:active {
   transform: scale(1.025);
 }
 
-#result {
-  text-align: center;
-  font-size: 50px;
-  margin: 0;
-  padding: 0;
-  color: red;
+@keyframes bounceIn { /* animation for result text - Van Huynh, from website https://freefrontend.com/jquery-text-animations-effects/ */
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1.15)
+  }
+  70% {
+    transform: scale(.9)
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
-#new-game {
-  position: absolute;
-  right: 15%;
-  width: 100px;
-  border-radius: 50%;
+@keyframes slideDown {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(5px);
+  }
+  70% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-img {
-  pop-in 0.5s;
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(-3px);
+  }
+  70% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-@-webkit-keyframes pop-in {
-  0% { opacity: 0; transform: scale(0.5); }
-  100% { opacity: 1; transform: scale(1); }
+@keyframes spinIn {
+  0% {
+    opacity: 0;
+    transform: rotate(180deg) scale(0);
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    transform: rotate(360deg) scale(1.15)
+  }
+  70% {
+    transform: rotate(360deg) scale(.9)
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
 }
