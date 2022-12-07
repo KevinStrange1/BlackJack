@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="style.css" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
-        <script src="Blackjack.js"></script>
-        <title>Black Jack</title>
-    </head>
 
-    <body>
-        <button id="new-game" onClick="window.location.reload();">New Game</button>
-        <div class="container">
-            <div class="top">
-                <h1>Dealer: <span id="dealer-sum"></span></h1>
-                    <div id="dealer-cards">
-                        <img id="hidden" src="./Images/card back purple.png">
-                    </div>
-                <h1>Player: <span id="player-sum"></span></h1>
-                    <div id="player-cards">
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="Blackjack.js"></script>
+    <title>Black Jack</title>
+</head>
+<audio id="shuffling">
+    <source src="Audio/shuffling.wav" type="audio/mpeg">
+  </audio>
+<body>
+    <button id="new-game" class="new-game" role="button" onclick="window.location.reload()">New Game</button>
+    <div class="container">
+        <div class="top">
+            <h1>Dealer: <span id="dealer-sum"></span></h1>
+            <div id="dealer-cards">
+                <img id="hidden" src="./Images/card back purple.png">
             </div>
-            <div class="bottom">
-                <button id="hit" role="button">Hit!</button>
-                <button id="stay" role="button">Stay!</button>
-            </div>    
-                <p id="result"></p>
+            <h1>Player: <span id="player-sum"></span></h1>
+            <div id="player-cards">
+            </div>
         </div>
-    </body>
+        <div class="bottom">
+            <button id="hit" role="button">Hit!</button>
+            <button id="stay" role="button">Stay!</button>
+        </div>
+        <p id="result" class="bounce_in_animation"></p>
+    </div>
+</body>
 
 </html>
