@@ -11,9 +11,11 @@ body {
     display: grid;
     place-content: center;
     min-height: 100vh;
-    background-image: url(./Images/green-slate.jpg);
+    /* background-image: url(./Images/green-slate.jpg); removed because of file size*/ 
     margin: 0;
     padding: 0;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,50,1) 100%, rgba(0,212,255,1) 100%);
  }
 
  h1 {
