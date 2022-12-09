@@ -16,12 +16,11 @@ window.onload = function () {
     shuffle(deck);
     startGame();
     playAudio();
-    document.getElementById("player-sum").innerText = playerResult;
 }
 function playAudio() { //plays a shuffling sound at start of game. Does not work unless you enable autoplay in browser.
-    const shuffling = document.getElementById("shuffling");
-    shuffling.play();
-    } 
+    const $shuffling = new Audio("Audio/shuffling.wav");
+    $shuffling.play();
+    }
 
 function buildDeck() { //builds deck of cards
     deck = [];
@@ -67,41 +66,42 @@ function checkAce(card) { //checks if card is an ace.
 
 function playerAceLogic (playerResult, playerAceCount) { //player ace logic.
     while (playerResult > 21 && playerAceCount > 0) {
+        playerAceCount -= 1
         playerResult -= 10;
-        playerAceCount -= 1;
     }
-    document.getElementById("player-sum").innerText = playerResult;
+    $("#player-sum").text(playerResult);
     return playerResult;
 }
 
 function dealerAceLogic (dealerResult, dealerAceCount) { //dealer ace logic.
     while (dealerResult > 21 && dealerAceCount > 0) {
+        dealerAceCount -= 1
         dealerResult -= 10;
-        dealerAceCount -= 1;
     }
-    document.getElementById("dealer-sum").innerText = dealerResult;
+    $("#dealer-sum").text(dealerResult);
     return dealerResult;
 }
 
 function getDealerCards(numberOfCards) { //deals dealers cards.
     for (let j = 0; j < numberOfCards; j++) {
-        let cardImg = document.createElement('Img');
+        let $cardImg = $('<img>');
         let card = deck.pop();
-        cardImg.src = './Images/' + card + '.png';
-        dealerResult += cardValues(card);
+        $cardImg.attr('src', './Images/' + card + '.png');
         dealerAceCount += checkAce(card);
-        document.getElementById("dealer-cards").append(cardImg);
+        dealerResult += cardValues(card);
+        $cardImg.appendTo("#dealer-cards");
     }
 }
 
 function getPlayerCards(numberOfCards) { //deals players cards.
     for (let i = 0; i < numberOfCards; i++) {
-        let cardImg = document.createElement('Img');
+        let $cardImg = $('<img>');
         let card = deck.pop();
-        cardImg.src = './Images/' + card + '.png';
-        playerResult += cardValues(card);
+        $cardImg.attr('src', './Images/' + card + '.png');
         playerAceCount += checkAce(card);
-        document.getElementById("player-cards").append(cardImg);
+        playerResult += cardValues(card);
+        $cardImg.appendTo("#player-cards");
+        $("#player-sum").text(playerResult);
    }
 }
 
@@ -114,12 +114,16 @@ function startGame() {
     getDealerCards(1);
     getPlayerCards(2);
 
-    document.getElementById("hit").addEventListener('click', hit);
-    document.getElementById("stay").addEventListener('click', stay);
+    $("#hit").click(function(){
+        hit()
+    });
+    $("#stay").click(function(){
+        stay()
+    });
 
     const $click = new Audio("Audio/click.wav"); //adds button click sound.
-    $("#hit").click(e => $click.play());
-    $("#stay").click(e => $click.play());
+    $("#hit").click(_element => $click.play());
+    $("#stay").click(_element => $click.play());
 }
 
 function hit () {
@@ -127,24 +131,25 @@ function hit () {
         return;
     }
     getPlayerCards(1);
-    document.getElementById("player-sum").innerText = playerResult;
 
     if (playerAceLogic(playerResult, playerAceCount) > 21) {
         hitCard = false;
         stay();
-        document.getElementById("player-sum").innerText = playerResult;
     }
 }
 
-function stay () {
-    playerResult = playerAceLogic(playerResult, playerAceCount);   
+function stay () {  
+    dealerResult = dealerAceLogic(dealerResult, dealerAceCount);
+    playerResult = playerAceLogic(playerResult, playerAceCount);
 
     hitCard = false;
-    document.getElementById('hidden').src="./Images/" + hidden + ".png";
-
-    while (dealerResult < 17) {     //unhide dealer card and add dealer rules.
+    $("#hidden").attr("src", "./Images/" + hidden + ".png");
+    
+    while (dealerAceLogic(dealerResult, dealerAceCount) < 17) {     //unhide dealer card and add dealer rules.
         getDealerCards(1);  
-        dealerResult = dealerAceLogic(dealerResult, dealerAceCount);     
+    
+    if (dealerAceLogic(dealerResult, dealerAceCount) >= 21) {
+    }
    }
 
     let result = ""; //adds result text.
@@ -167,11 +172,10 @@ function stay () {
     else if (playerResult < dealerResult) {
         result = "You Lose!";
     }
-    document.getElementById("result").innerText = result;
-    document.getElementById("dealer-sum").innerText = dealerResult;
-    document.getElementById("player-sum").innerText = playerResult;
+    $("#result").text(result);
+    $("#player-sum").text(playerResult);
 
-$(document).ready(function(){                   // add results and sounds with jquery.
+$(document).ready(function(){                   // add results and sounds.
     const $win = new Audio("Audio/cheer.wav");
     const $lose = new Audio("Audio/boo.wav");
     const $blackjack = new Audio("Audio/blackjack.wav"); 
@@ -193,6 +197,7 @@ $(document).ready(function(){                   // add results and sounds with j
             $("#result").css("color", "#33e2eb")
             break;
     }
+
 });
 
 
@@ -242,4 +247,4 @@ $(document).ready(function(){                   // add results and sounds with j
             }
     i++;
   }, 1000 + 50 * temp.length + 250);
-}
+}   
